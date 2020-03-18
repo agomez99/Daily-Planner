@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   // get times from moment
   const now = moment().format("MMMM Do YYYY");
   var nowHour24 = moment().format("H");
@@ -16,23 +17,15 @@ $(document).ready(function() {
   // retrieve storage if available
   if (storedPlans !== null) {
     planTextArr = storedPlans;
-<<<<<<< HEAD
-  } else {
-    // always lunch at 12
-    planTextArr = new Array(9);
-    planTextArr[4] = "Lunch";
-=======
     } else {
     planTextArr = new Array(12);
     planTextArr[3] = "Lunch";
->>>>>>> 13b7c1d3a5cd6ca209be733f6e973e28744874ef
   }
 
   // set variable referencing planner element
   var planDiv = $("#planContainer");
   // clear existing elements
   planDiv.empty();
-
   // build calendar by row for hours starting at 9
   for (var hour = 9; hour <= 17; hour++) {
     var index = hour - 9;
@@ -97,7 +90,7 @@ $(document).ready(function() {
     // set row color based on time and add row
     updateRowColor(divRow, hour);
     planDiv.append(divRow);
-  };
+  }
   // update function to color to hour of the day accordingly
   function updateRowColor($hourRow, hour) {
     if (hour < nowHour24) {
@@ -107,14 +100,14 @@ $(document).ready(function() {
     } else {
       $hourRow.css("background-color", "#ff6347");
     }
-  };
+  }
   // saves to local storage
   $(document).on("click", "i", function(event) {
     event.preventDefault();
     var index = $(this).attr("save-id");
     var inputId = "#input-" + index;
-    var $value = $(inputId).val();
-    planTextArr[index] = $value;
+    var value = $(inputId).val();
+    planTextArr[index] = value;
     localStorage.setItem("storedPlans", JSON.stringify(planTextArr));
   });
 });
